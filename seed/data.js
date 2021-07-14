@@ -1,24 +1,25 @@
-import db from '../db/connection.js'
-import Post from '../models/post.js'
-import faker from 'faker'
+import db from "../db/connection.js";
+import Post from "../models/post.js";
 
 const insertData = async () => {
   // reset database
-  await db.dropDatabase()
+  await db.dropDatabase();
 
-    // create an array of 20 objects
-    // use faker package to generate fake data
-    const posts = [...Array(20)].map(item => {
-        return {
-            title: faker.lorem.sentence(),
-            description: faker.lorem.paragraph(),
-        }
-    })
-    await Post.insertMany(posts)
-    console.log('Created Posts!')
+  const posts = [
+    {
+      title: "post1",
+      description: "this is our blog description",
+    },
+    {
+      title: "post2",
+      description: "weare creating a group project!",
+    },
+  ];
+  await Post.insertMany(posts);
+  console.log("Created Posts!");
 
   // close database connection. done.
-  db.close()
-}
+  db.close();
+};
 
-insertData()
+insertData();
