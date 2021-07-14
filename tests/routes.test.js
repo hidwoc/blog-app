@@ -6,7 +6,7 @@ import faker from "faker";
 
 beforeAll(async () => {
   // create a test database url
-  const MONGODB_TEST_URI = `mongodb://127.0.0.1/projectsTestDatabase`;
+  const MONGODB_TEST_URI = `mongodb://127.0.0.1/postsTestDatabase`;
 
   // close the existing connection to the database so we can connect to the test database
   await mongoose.connection.close();
@@ -18,12 +18,16 @@ beforeAll(async () => {
   });
 
   // create an array of 2 objects
-  const posts = [...Array(2)].map((item) => {
-    return {
-      title: faker.lorem.sentence(),
-      description: faker.lorem.paragraph(),
-    };
-  });
+  const posts = [
+    {
+      title: "post1",
+      description: "this is our blog description",
+    },
+    {
+      title: "post2",
+      description: "weare creating a group project!",
+    },
+  ];
   await Post.insertMany(posts);
   console.log("Created posts!");
 });
@@ -31,10 +35,10 @@ beforeAll(async () => {
 // this variable will be used later in our tests
 let postId;
 
-// projects api tests
-describe("Test the express routes for post", () => {
+// posts api tests
+describe("Test the express routes for posts", () => {
   // test the GET express route for the '/api/posts' path
-  it("should show all post", async () => {
+  it("should show all posts", async () => {
     const res = await request(app).get(`/api/posts`);
     // test that the status code is 200 - successful
     expect(res.statusCode).toEqual(200);
@@ -42,13 +46,38 @@ describe("Test the express routes for post", () => {
     expect(res.body[0]).toHaveProperty("_id");
     // Save the _id value for later use with other tests
     postId = res.body[0]._id;
-  });
-  it("should show a specific project", async () => {
-    // create a GET request with SuperTest using the projectId from the previous POST test
-    const res = await request(app).get(`/api/projects/${postId}`);
-    expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty("_id");
-  });
+  }),
+    it("should show a specific project", async () => {
+      // create a GET request with SuperTest using the postId from the previous POST test
+      const res = await request(app).get(`/api/posts/${postId}`);
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty("_id");
+    }),
+    // test the POST express route for the '/api/posts' path
+    it("should create a new post", async () => {
+      // create a POST request with SuperTest
+      const res = await request(app).post(`/api/posts`).send({
+        title: "Test Post",
+        description: "http://www.testing.com",
+      });
+      // test that the POST request was successful
+      expect(res.statusCode).toEqual(201);
+      expect(res.body).toHaveProperty("_id");
+    }),
+    it("should update a post", async () => {
+      // create a PUT request with SuperTest using the postId from the POST test
+      const res = await request(app).put(`/api/posts/${postId}`).send({
+        title: "Update Test Post",
+        description: "http://www.testing.com",
+      });
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty("_id");
+    }),
+    it("should delete a post", async () => {
+      const res = await request(app).del(`/api/posts/${postId}`);
+      expect(res.statusCode).toEqual(200);
+      expect(res.text).toEqual("Post deleted");
+    });
 });
 
 afterAll(async () => {
