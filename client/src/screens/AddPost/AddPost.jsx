@@ -1,8 +1,10 @@
+import Layout from "../../components/Layout/Layout";
+
 const AddPost = () => {
   return (
-    <div>
+    <Layout>
       AddPost form goes here!
-    </div>
+    </Layout>
   );
 };
 
