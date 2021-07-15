@@ -42,5 +42,3 @@ export const deletePost = async (id) => {
     throw error;
   }
 };
-
-export default posts;
