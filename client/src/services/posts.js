@@ -1,0 +1,44 @@
+import api from "./apiConfig";
+
+export const getPosts = async () => {
+  try {
+    // notice not using axios, don’t need the config object or baseURL --> all of that set up in apiConfig.js
+    // now we can use “api” and the path only
+    const response = await api.get("/posts");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const getPost = async (id) => {
+  try {
+    const response = await api.get(`/posts/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const createPost = async (post) => {
+  try {
+    const response = await api.post("/posts", post);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const updatePost = async (id, post) => {
+  try {
+    const response = await api.put(`/posts/${id}`, post);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const deletePost = async (id) => {
+  try {
+    const response = await api.delete(`/posts/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
