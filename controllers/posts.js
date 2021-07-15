@@ -30,15 +30,10 @@ export const createPost = async (req, res) => {
 export const updatePost = async (req, res) => {
   try {
     const { id } = req.params;
-    await Post.findByIdAndUpdate(id, req.body, { new: true }, (err, Post) => {
-      if (err) {
-        res.status(500).json(err);
-      }
-      if (!post) {
-        res.status(500).send("Post not found!");
-      }
-      return res.status(200).json(post);
+    const post = await Post.findByIdAndUpdate(id, req.body, {
+      new: true,
     });
+    res.status(200).json(post);
   } catch (error) {
     return res.status(500).send(error.message);
   }
