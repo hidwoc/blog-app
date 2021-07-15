@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import Layout from "../../components/Layout/Layout";
 import { createPost } from "../../services/posts";
 import { useHistory } from "react-router";
