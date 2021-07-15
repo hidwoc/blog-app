@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Layout from "../../components/Layout/Layout"
 import { getPosts } from "../../services/posts";
 
 const Home = () => {
@@ -9,12 +10,13 @@ const Home = () => {
         const allPosts = await getPosts()
         console.log(allPosts);
       }
+      fetchPosts();
   }, [] )
 
   return (
-    <div>
+    <Layout>
       This is where Posts will go
-    </div>
+    </Layout>
   );
 };
 
