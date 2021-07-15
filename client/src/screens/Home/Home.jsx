@@ -18,9 +18,17 @@ const Home = () => {
     <div className="layoutofHome">
       <Layout>
         <div className="theposts">
-          {posts.map((post) => (
-            <Post key={post._id} />
-          ))}
+          {!posts ? (
+            <h4>loading</h4>
+          ) : (
+            posts.map((post) => (
+              <Post
+                title={post.title}
+                description={post.description}
+                key={post._id}
+              />
+            ))
+          )}
         </div>
       </Layout>
     </div>
