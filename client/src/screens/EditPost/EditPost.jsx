@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
-import { createPost } from "../../services/posts";
-import { useHistory } from "react-router";
+import { createPost, getPost, updatePost } from "../../services/posts";
+import { useHistory, useParams } from "react-router";
 
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const history = useHistory();
+  const params = useParams();
+  useEffect(() => {
+    if (params.id) {
+      const editPost = getPost(params.id);
+      setTitle(editPost.title);
+      setDescription(editPost.description);
+    }
+  }, [params.id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +31,9 @@ const AddPost = () => {
   };
   return (
     <Layout>
+        Edit Form
       <form onSubmit={handleSubmit}>
-        <h1 id="formHead">FORM</h1>
+        <h1 id="formHead">Edit FORM</h1>
         <label id="formL" htmlFor="">
           Title:
         </label>
