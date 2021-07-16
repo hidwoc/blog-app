@@ -1,7 +1,11 @@
 // import { Link } from "react-router-dom";
 import { deletePost } from "../../services/posts";
 
-const Post = ({_id, title, description}) => {
+const Post = ({ id, title, description, setToggleFetch }) => {
+  const handleDelete = () => {
+    deletePost(id);
+    setToggleFetch((curr) => !curr);
+  };
 
   return (
     <div className="post-details">
@@ -9,7 +13,9 @@ const Post = ({_id, title, description}) => {
       <div className="post-description">{description}</div>
       <div className="post-buttons">
         <button className="edit-button">EDIT</button>
-        <button className="delete-button" onClick={() => deletePost(_id)}>DELETE</button>
+        <button className="delete-button" onClick={handleDelete}>
+          DELETE
+        </button>
       </div>
     </div>
   );

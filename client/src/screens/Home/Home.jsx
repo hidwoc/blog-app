@@ -5,6 +5,7 @@ import { getPosts } from "../../services/posts";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [toggleFetch, setToggleFetch] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -12,7 +13,7 @@ const Home = () => {
       setPosts(allPosts);
     };
     fetchPosts();
-  }, []);
+  }, [toggleFetch]);
 
   return (
     <div className="layoutofHome">
@@ -23,9 +24,11 @@ const Home = () => {
           ) : (
             posts.map((post) => (
               <Post
+                key={post._id}
+                id={post._id}
                 title={post.title}
                 description={post.description}
-                key={post._id}
+                setToggleFetch={setToggleFetch}
               />
             ))
           )}
