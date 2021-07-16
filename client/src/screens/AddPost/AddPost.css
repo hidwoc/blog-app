@@ -1,0 +1,38 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   margin-left: 20%;
+   margin-right: 20%;
+}
+#formContainer{
+display: flex;
+background: #130524;
+border-radius: 15px;
+justify-content: center;
+flex-direction: column;
+color: white;
+
+}
+#title{
+   margin: 10px;
+   padding: 10px;
+   width: 91%;
+   margin-left: 2.8%;
+
+}
+#description{
+    margin: 10px;
+    padding: 30px;
+    width: 85%;
+    margin-left: 2.8%;
+    
+}
+button{
+background: #FFFFFF;
+border-radius: 11px;
+width: 20%;
+margin-left: 41%;
+padding: 15px;
+font-weight: bolder;
+}
