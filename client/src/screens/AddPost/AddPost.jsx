@@ -7,7 +7,7 @@ const AddPost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const history = useHistory();
-  // useEffect(()=>{
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

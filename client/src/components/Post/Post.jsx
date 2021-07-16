@@ -1,14 +1,21 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deletePost } from "../../services/posts";
 
-const Post = ({ _id, title, description }) => {
+const Post = ({ id, title, description, setToggleFetch }) => {
+  const handleDelete = async() => {
+  await deletePost(id);
+    setToggleFetch((curr) => !curr);
+  };
+
   return (
     <div className="post-details">
       <div className="post-title">{title}</div>
       <div className="post-description">{description}</div>
       <div className="post-buttons">
-        <button className="edit-button">EDIT</button>
-        <button className="delete-button" onClick={() => deletePost(_id)}>
+        <button className="edit-button">
+          <Link to={`/editpost/${id}`}>EDIT</Link>
+        </button>
+        <button className="delete-button" onClick={handleDelete}>
           DELETE
         </button>
       </div>
