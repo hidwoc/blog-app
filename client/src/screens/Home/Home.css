@@ -1,0 +1,30 @@
+.layoutofHome{
+
+  color: black;
+}
+
+.theposts{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 100px;
+  padding: 100px;
+  
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  color: white;
+}
+body{
+  background-color: #D5FFBC;
+}
+button{
+  border-radius: 6px;
+  background-color: white;
+  border: .5px solid rgb(203, 203, 203);
+
+}
